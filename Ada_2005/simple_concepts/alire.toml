@@ -1,0 +1,12 @@
+name = "simple_concepts"
+description = "Chapter 02: Simple concepts"
+version = "0.1.0-dev"
+
+authors = ["Simon Kraemer"]
+maintainers = ["Simon Kraemer <wisniewski1@gmail.com>"]
+maintainers-logins = ["Vrumugun"]
+licenses = "MIT OR Apache-2.0 WITH LLVM-exception"
+website = ""
+tags = []
+
+executables = ["simple_concepts"]
