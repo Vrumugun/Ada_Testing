@@ -29,7 +29,7 @@ begin
       begin
          Ada.Integer_Text_IO.Get (mode_select);
       exception
-         when E : Ada.IO_Exceptions.Data_Error =>
+         when Ada.IO_Exceptions.Data_Error =>
             Ada.Text_IO.Put_Line ("Invalid input, not a valid mode values.");
             Ada.Text_IO.Skip_Line;
             mode_select := 0;
@@ -46,9 +46,10 @@ begin
                " F");
             Ada.Text_IO.New_Line;
          exception
-            when E : Constraint_Error =>
+            when Constraint_Error =>
                Ada.Text_IO.Put_Line ("Invalid input, " &
                   "temperature out of range!");
+               Ada.Text_IO.Skip_Line;
          end;
       elsif mode_select = 2 then
          Ada.Text_IO.Put ("Enter temperature in Fahrenheit: ");
@@ -61,9 +62,10 @@ begin
                " C");
             Ada.Text_IO.New_Line;
          exception
-            when E : Constraint_Error =>
+            when Constraint_Error =>
                Ada.Text_IO.Put_Line ("Invalid input, " &
                   "temperature out of range!");
+               Ada.Text_IO.Skip_Line;
          end;
       end if;
    end loop;
