@@ -16,12 +16,12 @@ procedure Temperature_Convert is
 
    function Celsius_To_Fahrenheit (C : Temperature_C) return Temperature_F is
    begin
-      return Temperature_F ((Float (C) * 9.0 / 5.0) + 32.0);
+      return Temperature_F ((C * 9) / 5 + Temperature_C'(32.0));
    end Celsius_To_Fahrenheit;
 
    function Fahrenheit_To_Celsius (F : Temperature_F) return Temperature_C is
    begin
-      return Temperature_C ((Float (F) - 32.0) * 5.0 / 9.0);
+      return Temperature_C ((F - Temperature_F'(32.0)) * 5 / 9);
    end Fahrenheit_To_Celsius;
 
    function Read_Mode return Mode_Type is
