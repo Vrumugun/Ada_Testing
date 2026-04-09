@@ -24,8 +24,10 @@ procedure Temperature_Convert is
    begin
       return Temperature_C ((Float (F) - 32.0) * 5.0 / 9.0);
    end Fahrenheit_To_Celsius;
-begin
-   while mode_select /= Mode_Exit loop
+
+   function Read_Mode return Mode_Type is
+      input_mode : Mode_Type;
+   begin
       Ada.Text_IO.Put ("Select: (1) - Convert from celsius to fahrenheit, " &
          "(2) - Convert from fahrenheit to celsius. " &
          "(3) - Exit. Enter selection: ");
@@ -34,21 +36,27 @@ begin
 
          case mode_input is
             when 1 =>
-               mode_select := Mode_C_to_F;
+               input_mode := Mode_C_to_F;
             when 2 =>
-               mode_select := Mode_F_to_C;
+               input_mode := Mode_F_to_C;
             when 3 =>
-               mode_select := Mode_Exit;
+               input_mode := Mode_Exit;
             when others =>
                Ada.Text_IO.Put_Line ("Invalid input, not a valid mode value.");
-               mode_select := Mode_None;
+               input_mode := Mode_None;
          end case;
       exception
          when Ada.IO_Exceptions.Data_Error =>
             Ada.Text_IO.Put_Line ("Invalid input, not a valid mode value.");
             Ada.Text_IO.Skip_Line;
-            mode_select := Mode_None;
+            input_mode := Mode_None;
       end;
+      return input_mode;
+   end Read_Mode;
+
+begin
+   while mode_select /= Mode_Exit loop
+      mode_select := Read_Mode;
 
       if mode_select = Mode_C_to_F then
          Ada.Text_IO.Put ("Enter temperature in Celsius: ");
