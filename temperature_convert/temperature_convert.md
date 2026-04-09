@@ -6,7 +6,7 @@ I'm trying to learn the Ada programming language. Give me an idea as a first sim
 
 A good first exercise in a new language should be small, but touch the core concepts you’ll use all the time. For Ada, that means: strong typing, procedures, and basic I/O.
 
-# 👉 Exercise: “Interactive Temperature Converter”
+## 👉 Exercise: “Interactive Temperature Converter”
 
 Write a simple Ada program that:
 
@@ -15,7 +15,7 @@ Write a simple Ada program that:
 - Prints the result
 - Repeats until the user chooses to exit
 
-# 💡 What you’ll practice
+## 💡 What you’ll practice
 
 - Defining a procedure (Ada’s main program structure)
 - Using Float types (Ada is strict about types)
@@ -23,14 +23,14 @@ Write a simple Ada program that:
 - Simple arithmetic
 - Loops (loop ... exit when)
 
-# 🧠 Extra challenges (after the basic version works)
+## 🧠 Extra challenges (after the basic version works)
 
 - Add conversion in both directions (C ↔ F)
 - Validate input (handle invalid numbers)
 - Format output nicely (e.g. 2 decimal places)
 - Split logic into separate procedures (e.g. Convert_To_Fahrenheit)
 
-# ✨ Why this is a good first step
+## ✨ Why this is a good first step
 
 Unlike something like “Hello World”, this forces you to deal with Ada’s strict typing and modularity, which is exactly what makes it popular in safety-critical domains (like the kind of systems governed by standards such as DO-178C).
 
