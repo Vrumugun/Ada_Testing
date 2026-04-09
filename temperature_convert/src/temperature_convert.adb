@@ -1,5 +1,4 @@
 with Ada.Text_IO;
-with Ada.Float_Text_IO;
 with Ada.Integer_Text_IO;
 with Ada.IO_Exceptions;
 
@@ -8,9 +7,11 @@ procedure Temperature_Convert is
    type Temperature_F is delta 0.01 range -1000.00 .. 1000.0;
    type Mode_Type is (Mode_None, Mode_C_to_F, Mode_F_to_C, Mode_Exit);
 
+   package Temp_C_IO is new Ada.Text_IO.Fixed_IO (Temperature_C);
+   package Temp_F_IO is new Ada.Text_IO.Fixed_IO (Temperature_F);
+
    input_temperature_C : Temperature_C;
    input_temperature_F : Temperature_F;
-   input_value : Float;
    mode_input : Integer;
    mode_select : Mode_Type := Mode_None;
 
@@ -52,8 +53,7 @@ begin
       if mode_select = Mode_C_to_F then
          Ada.Text_IO.Put ("Enter temperature in Celsius: ");
          begin
-            Ada.Float_Text_IO.Get (input_value);
-            input_temperature_C := Temperature_C (input_value);
+            Temp_C_IO.Get (input_temperature_C);
             Ada.Text_IO.Put ("Temperature in Fahrenheit: " &
                Temperature_F'Image (
                   Celsius_To_Fahrenheit (input_temperature_C)) &
@@ -64,12 +64,15 @@ begin
                Ada.Text_IO.Put_Line ("Invalid input, " &
                   "temperature out of range!");
                Ada.Text_IO.Skip_Line;
+            when Ada.IO_Exceptions.Data_Error =>
+               Ada.Text_IO.Put_Line ("Invalid input, not a valid mode value.");
+               Ada.Text_IO.Skip_Line;
+               mode_select := Mode_None;
          end;
       elsif mode_select = Mode_F_to_C then
          Ada.Text_IO.Put ("Enter temperature in Fahrenheit: ");
          begin
-            Ada.Float_Text_IO.Get (input_value);
-            input_temperature_F := Temperature_F (input_value);
+            Temp_F_IO.Get (input_temperature_F);
             Ada.Text_IO.Put ("Temperature in Celsius: " &
                Temperature_C'Image (
                   Fahrenheit_To_Celsius (input_temperature_F)) &
