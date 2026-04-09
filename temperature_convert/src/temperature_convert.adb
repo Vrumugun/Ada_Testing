@@ -83,6 +83,10 @@ begin
                Ada.Text_IO.Put_Line ("Invalid input, " &
                   "temperature out of range!");
                Ada.Text_IO.Skip_Line;
+            when Ada.IO_Exceptions.Data_Error =>
+               Ada.Text_IO.Put_Line ("Invalid input, not a valid mode value.");
+               Ada.Text_IO.Skip_Line;
+               mode_select := Mode_None;
          end;
       end if;
    end loop;
