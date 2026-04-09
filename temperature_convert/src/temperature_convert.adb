@@ -12,7 +12,6 @@ procedure Temperature_Convert is
 
    input_temperature_C : Temperature_C;
    input_temperature_F : Temperature_F;
-   mode_input : Integer;
    mode_select : Mode_Type := Mode_None;
 
    function Celsius_To_Fahrenheit (C : Temperature_C) return Temperature_F is
@@ -27,75 +26,85 @@ procedure Temperature_Convert is
 
    function Read_Mode return Mode_Type is
       input_mode : Mode_Type;
+      input_value : Integer;
    begin
-      Ada.Text_IO.Put ("Select: (1) - Convert from celsius to fahrenheit, " &
-         "(2) - Convert from fahrenheit to celsius. " &
-         "(3) - Exit. Enter selection: ");
-      begin
-         Ada.Integer_Text_IO.Get (mode_input);
-
-         case mode_input is
-            when 1 =>
-               input_mode := Mode_C_to_F;
-            when 2 =>
-               input_mode := Mode_F_to_C;
-            when 3 =>
-               input_mode := Mode_Exit;
-            when others =>
+      loop
+         Ada.Text_IO.Put ("Select: " &
+            "(1) - Convert from celsius to fahrenheit, " &
+            "(2) - Convert from fahrenheit to celsius. " &
+            "(3) - Exit. Enter selection: ");
+         begin
+            Ada.Integer_Text_IO.Get (input_value);
+            case input_value is
+               when 1 =>
+                  input_mode := Mode_C_to_F;
+               when 2 =>
+                  input_mode := Mode_F_to_C;
+               when 3 =>
+                  input_mode := Mode_Exit;
+               when others =>
+                  Ada.Text_IO.Put_Line ("Invalid input, not a valid mode.");
+                  input_mode := Mode_None;
+            end case;
+            return input_mode;
+         exception
+            when Ada.IO_Exceptions.Data_Error =>
                Ada.Text_IO.Put_Line ("Invalid input, not a valid mode value.");
-               input_mode := Mode_None;
-         end case;
-      exception
-         when Ada.IO_Exceptions.Data_Error =>
-            Ada.Text_IO.Put_Line ("Invalid input, not a valid mode value.");
-            Ada.Text_IO.Skip_Line;
-            input_mode := Mode_None;
-      end;
-      return input_mode;
+               Ada.Text_IO.Skip_Line;
+         end;
+      end loop;
    end Read_Mode;
+
+   function Get_Temperature_C return Temperature_C is
+      Value : Temperature_C;
+   begin
+      loop
+         begin
+            Ada.Text_IO.Put ("Enter temperature in Celsius: ");
+            Temp_C_IO.Get (Value);
+            return Value;
+         exception
+            when Constraint_Error | Ada.IO_Exceptions.Data_Error =>
+               Ada.Text_IO.Put_Line ("Invalid temperature.");
+               Ada.Text_IO.Skip_Line;
+         end;
+      end loop;
+   end Get_Temperature_C;
+
+   function Get_Temperature_F return Temperature_F is
+      Value : Temperature_F;
+   begin
+      loop
+         begin
+            Ada.Text_IO.Put ("Enter temperature in Fahrenheit: ");
+            Temp_F_IO.Get (Value);
+            return Value;
+         exception
+            when Constraint_Error | Ada.IO_Exceptions.Data_Error =>
+               Ada.Text_IO.Put_Line ("Invalid temperature.");
+               Ada.Text_IO.Skip_Line;
+         end;
+      end loop;
+   end Get_Temperature_F;
 
 begin
    while mode_select /= Mode_Exit loop
       mode_select := Read_Mode;
 
       if mode_select = Mode_C_to_F then
-         Ada.Text_IO.Put ("Enter temperature in Celsius: ");
-         begin
-            Temp_C_IO.Get (input_temperature_C);
-            Ada.Text_IO.Put ("Temperature in Fahrenheit: " &
-               Temperature_F'Image (
-                  Celsius_To_Fahrenheit (input_temperature_C)) &
-               " F");
-            Ada.Text_IO.New_Line;
-         exception
-            when Constraint_Error =>
-               Ada.Text_IO.Put_Line ("Invalid input, " &
-                  "temperature out of range!");
-               Ada.Text_IO.Skip_Line;
-            when Ada.IO_Exceptions.Data_Error =>
-               Ada.Text_IO.Put_Line ("Invalid input, not a valid mode value.");
-               Ada.Text_IO.Skip_Line;
-               mode_select := Mode_None;
-         end;
+         input_temperature_C := Get_Temperature_C;
+         Ada.Text_IO.Put ("Temperature in Fahrenheit: " &
+            Temperature_F'Image (
+               Celsius_To_Fahrenheit (input_temperature_C)) &
+            " F");
+         Ada.Text_IO.New_Line;
       elsif mode_select = Mode_F_to_C then
-         Ada.Text_IO.Put ("Enter temperature in Fahrenheit: ");
-         begin
-            Temp_F_IO.Get (input_temperature_F);
-            Ada.Text_IO.Put ("Temperature in Celsius: " &
-               Temperature_C'Image (
-                  Fahrenheit_To_Celsius (input_temperature_F)) &
-               " C");
-            Ada.Text_IO.New_Line;
-         exception
-            when Constraint_Error =>
-               Ada.Text_IO.Put_Line ("Invalid input, " &
-                  "temperature out of range!");
-               Ada.Text_IO.Skip_Line;
-            when Ada.IO_Exceptions.Data_Error =>
-               Ada.Text_IO.Put_Line ("Invalid input, not a valid mode value.");
-               Ada.Text_IO.Skip_Line;
-               mode_select := Mode_None;
-         end;
+         input_temperature_F := Get_Temperature_F;
+         Ada.Text_IO.Put ("Temperature in Celsius: " &
+            Temperature_C'Image (
+               Fahrenheit_To_Celsius (input_temperature_F)) &
+            " C");
+         Ada.Text_IO.New_Line;
       end if;
    end loop;
 end Temperature_Convert;
