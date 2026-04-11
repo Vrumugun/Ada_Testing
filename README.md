@@ -7,9 +7,23 @@ just testing Ada programming language
 - very strong typing system
 - cleary distinguishes between statements and expressions
 
-# Add Alire to path:
+## Alire
+
+### Add Alire to path:
 
 $env:Path += ";C:\Program Files\Alire\bin"
+
+### Commands
+
+alr init --bin myproj
+
+alr build
+
+alr run
+
+alr run -a Simon
+
+alr run -a 5
 
 # Links
 
@@ -20,9 +34,3 @@ https://learn.adacore.com/
 ## Alire documentation
 
 https://alire.ada.dev/docs/#first-steps
-
-alr init --bin myproj
-alr build
-alr run
-alr run -a Simon
-alr run -a 5
