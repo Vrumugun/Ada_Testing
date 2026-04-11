@@ -1,0 +1,1 @@
+procedure Classify_Number (X : Integer);
