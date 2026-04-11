@@ -5,7 +5,13 @@ just testing Ada programming language
 
 $env:Path += ";C:\Program Files\Alire\bin"
 
-# Link to Alire documentation
+# Links
+
+##  Learn Adacore
+
+https://learn.adacore.com/
+
+## Alire documentation
 
 https://alire.ada.dev/docs/#first-steps
 
