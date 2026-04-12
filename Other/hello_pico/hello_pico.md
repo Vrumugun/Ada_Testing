@@ -8,7 +8,9 @@ https://pico-doc.synack.me/
 # Create project
 
 alr init --bin hello_pico
+
 cd hello_pico
+
 alr with pico_bsp
 
 # Debug
