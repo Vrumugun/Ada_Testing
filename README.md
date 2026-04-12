@@ -7,6 +7,14 @@ just testing Ada programming language
 - very strong typing system
 - cleary distinguishes between statements and expressions
 
+## Learning Ada
+
+2.3.1 For loops
+
+Labs
+
+1.3 Positive Or Negative
+
 ## Alire
 
 ### Add Alire to path:
@@ -25,6 +33,22 @@ alr run -a Simon
 
 alr run -a 5
 
+# Boards
+
+## Arduino
+
+### Bossa Loader
+
+https://www.shumatech.com/web/products/bossa
+
+## Digilent
+
+https://digilent.com/reference/programmable-logic/start
+
+### Zynq UltraScale+
+
+https://digilent.com/reference/programmable-logic/genesys-zu/start
+
 # Links
 
 ##  Learn Adacore
@@ -34,3 +58,12 @@ https://learn.adacore.com/
 ## Alire documentation
 
 https://alire.ada.dev/docs/#first-steps
+
+## Ada on Cortex
+
+http://inspirel.com/articles/Ada_On_Cortex.html
+https://www.lulu.com/shop/maciej-sobczak/ada-and-spark-on-arm-cortex-m/paperback/product-22614818.html?page=1&pageSize=4
+
+## Ada on the Raspberry Pi Pico
+
+https://pico-doc.synack.me/
