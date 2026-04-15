@@ -1,6 +1,10 @@
 # Ada_Testing
 just testing Ada programming language
 
+## Toolchain
+
+Note: Currently configured: gnat_native=15.2.1
+
 ## Ada
 
 - focus on readability (prefer keywords to symbols)
@@ -16,6 +20,8 @@ Labs
 1.3 Positive Or Negative
 
 ## Alire
+
+C:\Users\simon\AppData\Local\alire\cache\builds
 
 ### Add Alire to path:
 
