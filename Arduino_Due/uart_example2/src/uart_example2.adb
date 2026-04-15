@@ -63,7 +63,8 @@ begin
         (Use_Processor_Clock => True,
          Clock_Frequency     => 84_000_000);
 
-   WDT.Disable;
+   --  WDT.Disable;
+   WDT.Configure (16#FFF#);
 
    LED.Configure_Output;
    LED_TX.Configure_Output;
@@ -100,6 +101,8 @@ begin
 
       Cycle_Counter := Cycle_Counter + 1;
       LED_TX.Set (False);
+
+      WDT.Reload;
 
       --  Keep a side effect in the loop so optimization does not remove delay.
       for J in 1 .. 10_000_000 loop
