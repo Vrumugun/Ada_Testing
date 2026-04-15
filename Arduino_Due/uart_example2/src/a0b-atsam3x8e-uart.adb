@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2024, Vadim Godunko
+--  Copyright (C) 2026, Simon Kraemer <simon.kraemer@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
