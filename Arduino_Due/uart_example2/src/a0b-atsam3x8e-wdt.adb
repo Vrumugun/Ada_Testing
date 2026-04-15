@@ -1,0 +1,14 @@
+--
+--  Copyright (C) 2024, Vadim Godunko
+--
+--  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+--
+
+package body A0B.ATSAM3X8E.WDT is
+
+   procedure Disable (Self : in out WDT_Controller_Base'Class) is
+   begin
+      Self.Peripheral.MR := (WDDIS => True, others => <>);
+   end Disable;
+
+end A0B.ATSAM3X8E.WDT;

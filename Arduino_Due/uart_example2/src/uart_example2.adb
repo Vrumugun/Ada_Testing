@@ -2,13 +2,13 @@ with A0B.ATSAM3X8E.PIO;
 with A0B.ATSAM3X8E.PIO.PIOA;
 with A0B.ATSAM3X8E.PIO.PIOB;
 with A0B.ATSAM3X8E.UART;
+with A0B.ATSAM3X8E.WDT;
 with A0B.ARMv7M;
 with A0B.ATSAM3X8E.SVD;
 with A0B.ATSAM3X8E.SVD.PIO;
 with A0B.ATSAM3X8E.SVD.PMC;
 with A0B.ARMv7M.SysTick_Clock_Timer;
 with A0B.Types.SVD;
-with A0B.ATSAM3X8E.SVD.SYSC;
 
 procedure Uart_Example2 is
    Uart : A0B.ATSAM3X8E.UART.UART_Controller renames A0B.ATSAM3X8E.UART.UART1;
@@ -16,8 +16,11 @@ procedure Uart_Example2 is
      renames A0B.ATSAM3X8E.PIO.PIOB.PB27;
    LED_TX   : A0B.ATSAM3X8E.PIO.ATSAM3X8E_Pin
      renames A0B.ATSAM3X8E.PIO.PIOA.PA21;
-   WDT : A0B.ATSAM3X8E.SVD.SYSC.WDT_Peripheral
-      renames A0B.ATSAM3X8E.SVD.SYSC.WDT_Periph;
+   WDT : A0B.ATSAM3X8E.WDT.WDT_Controller renames A0B.ATSAM3X8E.WDT.WDT;
+
+   Header : constant String := "UART Example 2: " &
+      "Hello from Ada on Arduino Due!" &
+      Character'Val (13) & Character'Val (10);
 
    Message : String (1 .. 32);
    Last    : Natural := 0;
@@ -60,7 +63,7 @@ begin
         (Use_Processor_Clock => True,
          Clock_Frequency     => 84_000_000);
 
-   WDT.MR := (WDDIS => True, others => <>);
+   WDT.Disable;
 
    LED.Configure_Output;
    LED_TX.Configure_Output;
@@ -75,21 +78,9 @@ begin
 
    Uart.Configure (9_600);
 
-   Uart.Write_Char ('H');
-   Uart.Write_Char ('e');
-   Uart.Write_Char ('l');
-   Uart.Write_Char ('l');
-   Uart.Write_Char ('o');
-   Uart.Write_Char (',');
-   Uart.Write_Char (' ');
-   Uart.Write_Char ('W');
-   Uart.Write_Char ('o');
-   Uart.Write_Char ('r');
-   Uart.Write_Char ('l');
-   Uart.Write_Char ('d');
-   Uart.Write_Char ('!');
-   Uart.Write_Char (ASCII.LF);
-   Uart.Write_Char (ASCII.CR);
+   for C of Header loop
+         Uart.Write_Char (C);
+   end loop;
 
    loop
       LED_TX.Set (True);
