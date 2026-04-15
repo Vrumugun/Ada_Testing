@@ -1,7 +1,7 @@
-with "config/hello_arduino_config.gpr";
+with "config/led_timer_config.gpr";
 with "light_arduino_due";
 
-project Hello_Arduino is
+project Led_Timer is
 
    for Target use Light_Arduino_Due'Target;
    for Runtime use Light_Arduino_Due'Runtime;
@@ -13,13 +13,13 @@ project Hello_Arduino is
    end Linker;
 
    for Source_Dirs use ("src/", "config/");
-   for Object_Dir use "obj/" & Hello_Arduino_Config.Build_Profile;
+   for Object_Dir use "obj/" & Led_Timer_Config.Build_Profile;
    for Create_Missing_Dirs use "True";
    for Exec_Dir use "bin";
-   for Main use ("hello_arduino.adb");
+   for Main use ("led_timer_main.adb");
 
    package Compiler is
-      for Default_Switches ("Ada") use Hello_Arduino_Config.Ada_Compiler_Switches;
+      for Default_Switches ("Ada") use Led_Timer_Config.Ada_Compiler_Switches;
    end Compiler;
 
    package Binder is
@@ -30,4 +30,4 @@ project Hello_Arduino is
       for Artifacts (".") use ("share");
    end Install;
 
-end Hello_Arduino;
+end Led_Timer;
