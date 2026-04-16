@@ -21,7 +21,7 @@ Labs
 
 ## Alire
 
-C:\Users\simon\AppData\Local\alire\cache\builds
+C:\Users\<username>\AppData\Local\alire\cache\builds
 
 ### Add Alire to path:
 
